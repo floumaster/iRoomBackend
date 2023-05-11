@@ -13,6 +13,14 @@ const insertData = async (entity, values) => {
     return data;
 }
 
+const deleteData = async (entity) => {
+    const data = await entity.destroy({
+        where: {},
+        truncate: true
+    }).catch(err => console.log(err))
+    return data;
+}
+
 const update = async (entity, values, idnt) => {
     const data = await entity.update(values, {
         where: {
@@ -26,5 +34,6 @@ module.exports = {
     selectEntity,
     selectWithConditon,
     insertData,
+    deleteData,
     update
 }

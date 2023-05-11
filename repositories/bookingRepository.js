@@ -17,7 +17,8 @@ class BookingRepository {
         return addedBooking
     }
 
-    async editBooking(id, changes) {
+    async editBooking(changes, id) {
+        console.log(id, changes)
         const editedBooking = await update(this.model, changes, id)
         return editedBooking
     }

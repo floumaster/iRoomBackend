@@ -17,6 +17,7 @@ module.exports = {
     async addRoom(req, res){
         res.set("Content-Type", "application/json");
         try{
+            console.log(req.body)
             res.statusCode = 201
             const addedRoom = await roomRepo.addRoom(req.body.room, req.body.assetsIds)
             res.send(JSON.stringify(addedRoom));

@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors');
 const timeRouter = require('./routes/times')
 const recurringRouter = require('./routes/recurrings')
 const floorRouter = require('./routes/floors')
@@ -11,6 +12,7 @@ const bookingRouter = require('./routes/bookings')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
+app.use(cors());
 
 app.use(bodyParser.json())
 app.use('/time', timeRouter);

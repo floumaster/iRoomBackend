@@ -29,7 +29,7 @@ Bookings.init({
         comment: "Booking dates, string",
     },
     timeStart: {
-        type: Sequelize.DATE,
+        type: Sequelize.TEXT,
         allowNull: false,
         primaryKey: false,
         autoIncrement: false,
@@ -37,7 +37,7 @@ Bookings.init({
         comment: "Booking timeStart, string",
     },
     timeEnd: {
-        type: Sequelize.DATE,
+        type: Sequelize.TEXT,
         allowNull: false,
         primaryKey: false,
         autoIncrement: false,

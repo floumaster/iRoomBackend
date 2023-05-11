@@ -30,6 +30,7 @@ module.exports = {
         res.set("Content-Type", "application/json");
         try{
             res.statusCode = 201
+            console.log(req.body)
             const editedBooking = await bookingRepo.editBooking(req.body, req.body.id)
             res.send(JSON.stringify(editedBooking));
         }
