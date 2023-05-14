@@ -6,6 +6,7 @@ const router = express.Router();
 router
     .get("/", bookingController.getAllBookings)
     .post("/addBooking", bookingController.addBooking)
+    .post("/getAvailableTimesInRoom", bookingController.getAvailableTimesInRoom)
     .put("/editBooking", bookingController.editBooking)
 
 module.exports = router;

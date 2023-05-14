@@ -30,7 +30,6 @@ module.exports = {
         res.set("Content-Type", "application/json");
         try{
             res.statusCode = 201
-            console.log(req.body)
             const editedBooking = await bookingRepo.editBooking(req.body, req.body.id)
             res.send(JSON.stringify(editedBooking));
         }
@@ -38,5 +37,17 @@ module.exports = {
             res.statusCode = 404;
             res.send(JSON.stringify(err));
         }
-    }
+    },
+    async getAvailableTimesInRoom(req, res){
+        res.set("Content-Type", "application/json");
+        try{
+            res.statusCode = 201
+            const availableTimesForRoom = await bookingRepo.getAvailableTimesInRoom(req.body)
+            res.send(JSON.stringify(availableTimesForRoom));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify(err));
+        }
+    },
 };
