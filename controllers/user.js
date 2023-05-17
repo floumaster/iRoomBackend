@@ -35,7 +35,19 @@ module.exports = {
         }
         catch(err){
             res.statusCode = 404;
-            res.send(JSON.stringify(err));
+            res.send(JSON.stringify({error: err.message}));
+        }
+    },
+    async register(req, res){
+        res.set("Content-Type", "application/json");
+        try{
+            res.statusCode = 200
+            const user = await userRepo.register(req.body)
+            res.send(JSON.stringify(user));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify({error: err.message}));
         }
     }
 };

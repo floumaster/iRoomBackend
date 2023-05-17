@@ -7,5 +7,6 @@ router
     .get("/", userController.getAllUsers)
     .post("/addUsers", userController.addUsers)
     .post("/login", userController.login)
+    .post("/register", userController.register)
 
 module.exports = router;

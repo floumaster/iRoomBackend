@@ -52,6 +52,14 @@ Users.init({
         unique: false,
         comment: "Users teamId, string",
     },
+    isAdmin: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        primaryKey: false,
+        autoIncrement: false,
+        unique: false,
+        comment: "Is user admin, string",
+    },
 }, { sequelize, modelName: 'users', tableName: 'users', timestamps: false })
 
 module.exports = Users;
