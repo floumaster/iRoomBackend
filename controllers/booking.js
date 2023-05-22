@@ -50,4 +50,16 @@ module.exports = {
             res.send(JSON.stringify(err));
         }
     },
+    async deleteBooking(req, res) {
+        res.set("Content-Type", "application/json")
+        try{
+            res.statusCode = 201
+            const deletedBooking = await bookingRepo.deleteBookingById(req.body)
+            res.send(JSON.stringify(deletedBooking));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify(err));
+        }
+    }
 };

@@ -13,9 +13,9 @@ const insertData = async (entity, values) => {
     return data;
 }
 
-const deleteData = async (entity) => {
+const deleteData = async (entity, condition) => {
     const data = await entity.destroy({
-        where: {},
+        where: condition,
         truncate: true
     }).catch(err => console.log(err))
     return data;

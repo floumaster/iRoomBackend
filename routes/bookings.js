@@ -8,5 +8,6 @@ router
     .post("/addBooking", bookingController.addBooking)
     .post("/getAvailableTimesInRoom", bookingController.getAvailableTimesInRoom)
     .put("/editBooking", bookingController.editBooking)
+    .delete("/deleteBooking", bookingController.deleteBooking)
 
 module.exports = router;

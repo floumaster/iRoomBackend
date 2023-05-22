@@ -69,6 +69,13 @@ class BookingRepository {
         }
         return result
     }
+
+    async deleteBookingById(body) {
+        console.log(body)
+        const updatedBookings = await update(this.model, body.updatedBooking, body.updatedBooking.id)
+        console.log(updatedBookings)
+        return updatedBookings
+    }
 };
 
 

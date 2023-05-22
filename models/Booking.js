@@ -21,7 +21,7 @@ Bookings.init({
         comment: "Booking title, string",
     },
     dates: {
-        type: Sequelize.ARRAY(Sequelize.DATE),
+        type: Sequelize.ARRAY(Sequelize.TEXT),
         allowNull: false,
         primaryKey: false,
         autoIncrement: false,
