@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const Team = require('../models/Team')
-const { selectEntity, insertData, selectWithConditon, update } = require('../utils/utils')
+const Booking = require('../models/Booking')
+const { selectEntity, insertData, selectWithConditon, update, deleteData } = require('../utils/utils')
 var md5 = require('md5');
 
 class UserRepository {
@@ -19,6 +20,12 @@ class UserRepository {
         })
     }
 
+    async deleteUser(id) {
+        await deleteData(Booking, {userId: id})
+        const deletedEntity = await deleteData(this.model, {id})
+        return deletedEntity
+    }
+
     async addUsers(users) {
         const addedUserPromises = users.map(user => {
             return insertData(this.model, user)
@@ -30,6 +37,14 @@ class UserRepository {
                 businessUnitId: user.teamId
             }
         })
+    }
+
+    async editUser(user) {
+        const updtedUser = await update(this.model, {
+            ...user,
+            teamId: user.businessUnitId
+        }, user.id)
+        return updtedUser
     }
 
     async login(email, password) {

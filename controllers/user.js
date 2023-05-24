@@ -26,6 +26,30 @@ module.exports = {
             res.send(JSON.stringify(err));
         }
     },
+    async editUser(req, res){
+        res.set("Content-Type", "application/json");
+        try{
+            res.statusCode = 201
+            const addedUsers = await userRepo.editUser(req.body)
+            res.send(JSON.stringify(addedUsers));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify(err));
+        }
+    },
+    async deleteUser(req, res){
+        res.set("Content-Type", "application/json");
+        try{
+            res.statusCode = 201
+            const deletedUsers = await userRepo.deleteUser(req.body.id)
+            res.send(JSON.stringify(deletedUsers));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify(err));
+        }
+    },
     async login(req, res){
         res.set("Content-Type", "application/json");
         try{

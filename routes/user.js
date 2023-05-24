@@ -6,7 +6,9 @@ const router = express.Router();
 router
     .get("/", userController.getAllUsers)
     .post("/addUsers", userController.addUsers)
+    .put("/editUser", userController.editUser)
     .post("/login", userController.login)
     .post("/register", userController.register)
+    .delete("/deleteUser", userController.deleteUser)
 
 module.exports = router;

@@ -6,5 +6,7 @@ const router = express.Router();
 router
     .get("/", floorController.getAllFloors)
     .post("/addFloor", floorController.addFloor)
+    .put("/editFloor", floorController.editFloor)
+    .delete("/deleteFloor", floorController.deleteFloor)
 
 module.exports = router;

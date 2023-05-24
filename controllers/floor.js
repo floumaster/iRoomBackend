@@ -25,5 +25,29 @@ module.exports = {
             res.statusCode = 404;
             res.send(JSON.stringify(err));
         }
+    },
+    async editFloor(req, res){
+        res.set("Content-Type", "application/json");
+        try{
+            res.statusCode = 201
+            const editedFloor = await floorRepo.editFloor(req.body)
+            res.send(JSON.stringify(editedFloor));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify(err));
+        }
+    },
+    async deleteFloor(req, res){
+        res.set("Content-Type", "application/json");
+        try{
+            res.statusCode = 201
+            const deletedFloor = await floorRepo.deleteFloor(req.body.id)
+            res.send(JSON.stringify(deletedFloor));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify(err));
+        }
     }
 };

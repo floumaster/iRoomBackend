@@ -6,5 +6,7 @@ const router = express.Router();
 router
     .get("/", assetController.getAllAssets)
     .post("/addAsset", assetController.addAsset)
+    .put("/editAsset", assetController.editAsset)
+    .delete("/deleteAsset", assetController.deleteAsset)
 
 module.exports = router;

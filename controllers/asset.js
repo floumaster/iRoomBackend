@@ -25,5 +25,30 @@ module.exports = {
             res.statusCode = 404;
             res.send(JSON.stringify(err));
         }
+    },
+    async editAsset(req, res){
+        res.set("Content-Type", "application/json");
+        try{
+            res.statusCode = 201
+            console.log(req.body)
+            const addedAsset = await assetRepo.editAsset(req.body)
+            res.send(JSON.stringify(addedAsset));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify(err));
+        }
+    },
+    async deleteAsset(req, res){
+        res.set("Content-Type", "application/json");
+        try{
+            res.statusCode = 201
+            const deletedAsset = await assetRepo.deleteAsset(req.body.id)
+            res.send(JSON.stringify(deletedAsset));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify(err));
+        }
     }
 };

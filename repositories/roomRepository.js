@@ -1,7 +1,7 @@
 const Room = require('../models/Rooms')
 const RoomsAssets = require('../models/RoomsAssets')
 const Booking = require('../models/Booking')
-const { selectEntity, insertData, selectWithConditon } = require('../utils/utils')
+const { selectEntity, insertData, selectWithConditon, update, deleteData } = require('../utils/utils')
 
 class RoomRepository {
 
@@ -17,12 +17,14 @@ class RoomRepository {
             })
         })
         const roomsAssets = await Promise.all(roomsAssetsPromises)
+        const fullfilledRoomsAssets = roomsAssets.filter(asset => asset.length)
         const roomsWithAssets = rooms.map(room => {
             return {
                 ...room,
-                assetsIds: roomsAssets.find(roomAsset => {
+                assetsIds: fullfilledRoomsAssets
+                .find(roomAsset => {
                     return roomAsset[0].room_id === room.id
-                }).map(entity => entity.asset_id)
+                })?.map(entity => entity.asset_id) || []
             }
         })
         const roomsWithBookingsPromises = roomsWithAssets.map(room => {
@@ -52,6 +54,26 @@ class RoomRepository {
             ...insertedRoom.dataValues,
             assetsIds: assetIds
         }
+    }
+
+    async deleteRoom(id) {
+        await deleteData(RoomsAssets, {room_id: id})
+        await deleteData(Booking, {roomId: id})
+        const deletedEntity = await deleteData(this.model, {id})
+        return deletedEntity
+    }
+
+    async editRoom(room, assetsIds) {
+        const insertedRoom = await update(this.model, room, room.id)
+        const deleteAssetsIdsPromises = await deleteData(RoomsAssets, {room_id: room.id})
+        const assetsIdsPromises = assetsIds.map(id => {
+            return insertData(RoomsAssets, {
+                room_id: room.id,
+                asset_id: id
+            })
+        })
+        const assetIds = await Promise.all(assetsIdsPromises)
+        return true
     }
 };
 

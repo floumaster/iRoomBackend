@@ -1,5 +1,6 @@
 const Asset = require('../models/Assets')
-const { selectEntity, insertData } = require('../utils/utils')
+const RoomsAssets = require('../models/RoomsAssets')
+const { selectEntity, insertData, update, deleteData } = require('../utils/utils')
 
 class AssetRepository {
 
@@ -14,6 +15,17 @@ class AssetRepository {
 
     async addAsset(asset) {
         const insertedAsset = await insertData(this.model, asset)
+        return insertedAsset
+    }
+
+    async deleteAsset(id) {
+        await deleteData(RoomsAssets, {asset_id: id})
+        const deletedEntity = await deleteData(this.model, {id})
+        return deletedEntity
+    }
+
+    async editAsset(asset) {
+        const insertedAsset = await update(this.model, asset, asset.id)
         return insertedAsset
     }
 };
