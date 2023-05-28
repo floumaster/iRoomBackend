@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const Team = require('../models/Team')
 const Booking = require('../models/Booking')
-const { selectEntity, insertData, selectWithConditon, update, deleteData } = require('../utils/utils')
+const { selectEntity, insertData, selectWithConditon, update, deleteData, deleteDataWithTrancate } = require('../utils/utils')
 var md5 = require('md5');
 
 class UserRepository {
@@ -24,6 +24,20 @@ class UserRepository {
         await deleteData(Booking, {userId: id})
         const deletedEntity = await deleteData(this.model, {id})
         return deletedEntity
+    }
+
+    async setUsers(users) {
+        await deleteDataWithTrancate(this.model)
+        const addedUserPromises = users.map(user => {
+            return insertData(this.model, user)
+        })
+        const addedUser = await Promise.all(addedUserPromises)
+        return addedUser.map(user => {
+            return {
+                ...user,
+                businessUnitId: user.teamId
+            }
+        })
     }
 
     async addUsers(users) {

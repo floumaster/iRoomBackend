@@ -38,7 +38,7 @@ Users.init({
     },
     password: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
         primaryKey: false,
         autoIncrement: false,
         unique: false,

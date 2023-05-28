@@ -20,6 +20,14 @@ const deleteData = async (entity, condition) => {
     return data;
 }
 
+const deleteDataWithTrancate = async (entity, condition) => {
+    const data = await entity.destroy({
+        where: condition,
+        truncate : true
+    }).catch(err => console.log(err))
+    return data;
+}
+
 const update = async (entity, values, idnt) => {
     const data = await entity.update(values, {
         where: {
@@ -34,5 +42,6 @@ module.exports = {
     selectWithConditon,
     insertData,
     deleteData,
-    update
+    update,
+    deleteDataWithTrancate
 }

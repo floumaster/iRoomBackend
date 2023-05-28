@@ -50,6 +50,18 @@ module.exports = {
             res.send(JSON.stringify(err));
         }
     },
+    async setUsers(req, res){
+        res.set("Content-Type", "application/json");
+        try{
+            res.statusCode = 201
+            const uploadedUsers = await userRepo.setUsers(req.body)
+            res.send(JSON.stringify(uploadedUsers));
+        }
+        catch(err){
+            res.statusCode = 404;
+            res.send(JSON.stringify(err));
+        }
+    },
     async login(req, res){
         res.set("Content-Type", "application/json");
         try{

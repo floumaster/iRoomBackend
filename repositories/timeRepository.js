@@ -1,5 +1,5 @@
 const Time = require('../models/Times')
-const { selectEntity, insertData, deleteData } = require('../utils/utils')
+const { selectEntity, insertData, deleteData, deleteDataWithTrancate } = require('../utils/utils')
 
 class TimeRepository {
 
@@ -13,7 +13,7 @@ class TimeRepository {
     }
 
     async setTimes(times) {
-        await deleteData(this.model)
+        await deleteDataWithTrancate(this.model)
         const timeInsertPromises = times.map(time => {
             return insertData(this.model, time)
         });
