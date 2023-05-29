@@ -76,7 +76,7 @@ class UserRepository {
         const users = await selectEntity(this.model)
         const registeredUser = users.find(user => user.email === userInfo.email)
         if(!registeredUser)
-            throw new Error('There is no user with such email in the system')
+            throw new Error('No user with such email in the system')
         else{
             await update(this.model, {...userInfo, password: md5(userInfo.password)}, registeredUser.id)
             const usersUpdated = await selectEntity(this.model)
