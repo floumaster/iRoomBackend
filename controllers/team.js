@@ -30,7 +30,6 @@ module.exports = {
         res.set("Content-Type", "application/json");
         try{
             res.statusCode = 201
-            console.log(req.body)
             const addedTeam = await teamRepo.editTeam(req.body)
             res.send(JSON.stringify(addedTeam));
         }
